@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VUE.JS | Atributos Dinámicos</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+</head>
+<body>
+
+    <div id="app">
+
+        <input v-model="alto" type="range">Alto
+        <br>
+        <input v-model="ancho" type="range">Ancho
+        <br>
+        {{ urlCompleta }}
+        <br>
+        <img :src="urlCompleta" alt=""> <!-- :src === v-bind:src -->
+
+        <!-- <input type="text" v-model="enlace">
+        <a v-bind:href="enlace"> {{ enlace }} </a> -->
+    </div>
+    
+    <!-- VUE.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        new Vue ({
+            el: '#app',
+            data: {                
+                enlace: 'http://www.vuejs.org',
+                baseUrl: 'https://placekitten.com',
+                ancho: 50,
+                alto: 50
+            },
+            computed: {
+                urlCompleta() {
+                    return `${this.baseUrl}/${this.ancho * 3}/${this.alto * 3}`; 
+                    // return baseUrl/ancho/alto
+                }
+            }
+        });
+
+        // devtools config for chrome
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>
