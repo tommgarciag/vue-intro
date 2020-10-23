@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- Busqueda por tiempo -->
+        <input type="range" v-model="tiempo"> {{ tiempo }}
+        <hr>
+
+        <!-- Busqueda por nombre -->
+        <input type="search" v-model="busqueda" placeholder="Buscar aqui...">
+        <hr>
+
+        <!-- Iterando un objeto -->
+        <p v-for="(key, value) in usuario">
+            {{ key }} : {{ value }}
+        </p>
+        
+        <hr>
+
+        <!-- Iterando un array -->
+        <ul>
+            <li v-for="(tarea) in filtroTareas"> 
+                {{ tarea.nombre }} - {{ tarea.tiempo }}
+            </li>
+        </ul>
+    </div>
+
+    <!-- Vue.js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- Custom JS -->
+    <script>
+
+        new Vue({
+            el: "#app",
+            data: {
+                tiempo: 0,
+                busqueda: '',
+                usuario: {
+                    username: 'juanwmedia',
+                    role: 'admin'
+                },
+                tareas: [
+                    {nombre: 'Aprender JavaScript moderno', tiempo: 3},
+                    {nombre: 'Aprender Vue.js', tiempo: 7},
+                    {nombre: 'Reparar el coche', tiempo: 22},
+                    {nombre: 'Viajar más', tiempo: 16},
+                    {nombre: 'Comprar la cena', tiempo: 12},
+                    {nombre: 'Mejorar como desarrollador', tiempo: 9},
+                    {nombre: 'Dar un curso', tiempo: 14},
+                ]
+            },
+            // Propiedades Computadas
+            computed: {
+                filtroTareas() {
+                    // array.filter() >>> https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/filter
+
+                    // array.includes() >>> https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/includes
+
+                    return this.tareas.filter(tarea => {
+                        return tarea.tiempo <= this.tiempo && tarea.nombre.includes(this.busqueda);
+                    })
+                }
+            }
+        });
+
+        // vue.js devtools confif for chrome
+        Vue.config.devtools = true;
+    </script>
+    </script>
+</body>
+</html>
