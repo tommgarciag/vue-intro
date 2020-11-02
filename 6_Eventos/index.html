@@ -7,8 +7,7 @@
     <title>Vue</title>
 </head>
 <body>
-    <div id="app">
-        <!-- <form v-on:submit.prevent="guardarTarea"> -->
+    <div id="app">        
         <form v-on:submit.prevent="guardarTarea">
             <input type="text" v-model="nuevaTarea" placeholder="Tarea">
             <input type="submit" value="Guardar tarea">
@@ -71,8 +70,9 @@
                 }
             }
         });
+
         Vue.config.devtools = true;
     </script>
-    </script>
+    
 </body>
 </html>
