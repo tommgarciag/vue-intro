@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VUE | Watchers</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>   
+</head>
+<body>
+
+    <div id="app">
+        <h3>Cambia tu contraseña:</h3>
+        <input type="text" v-model="password">
+        <br>
+        <p> {{estado}} </p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue ({
+            el: '#app',
+            data: {
+                password: null,
+                estado: 'Ingrese su nueva contraseña...',
+                novalid: [
+                    '12345',
+                    'admin',
+                    'password'
+                ],
+            },
+            watch: {
+                password(nuevo, antiguo) {
+                    // console.log(nuevo,antiguo)
+                    if (this.novalid.indexOf(nuevo) > -1) {
+                        this.estado = 'Contraseña no válida.';
+                        return false;
+                    }
+
+                    if (nuevo.length < 5) {
+                        this.estado = 'La contraseña debe tener más de cinco caracteres.';
+                        return false;
+                    }
+
+                    this.estado = 'Contraseña correcta.'
+                }
+            }    
+        });
+
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>
