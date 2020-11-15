@@ -46,23 +46,23 @@
     <main id="app">
         <form>
             <label for="nombre">Nombre:</label>
-            <input type="text" required id="nombre" v-model="form.nombre">
+            <input type="text" required id="nombre" v-model="form.nombre" :class=" { invalido : !form.nombre } ">
 
             <label for="apellido">Apellido:</label>
-            <input type="text" required id="apellido" v-model="form.apellido">
+            <input type="text" required id="apellido" v-model="form.apellido" :class=" { invalido : !form.apellido } ">
 
             <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" required v-model="form.mensaje"></textarea>
+            <textarea id="mensaje" required v-model="form.mensaje" :class=" { invalido : !form.mansaje } "></textarea>
 
             <label for="">Horario de contacto:</label>
             <span>Mañana</span>
-            <input type="radio" value="mañana" v-model="form.horario">
+            <input type="radio" value="mañana" v-model="form.horarioContacto">
             <span>Tarde</span>
-            <input type="radio" value="tarde" v-model="form.horario">
+            <input type="radio" value="tarde" v-model="form.horarioContacto">
             <span>Noche</span>
-            <input type="radio" value="noche" v-model="form.horario">
+            <input type="radio" value="noche" v-model="form.horarioContacto">
 
-            <label for="producto">Producto:</label>
+            <label for="producto">Producto/s:</label>
             <select id="producto" v-model="form.producto" multiple>
                 <option value="producto1">Producto 1</option>
                 <option value="producto2">Producto 2</option>
@@ -76,7 +76,7 @@
 
             
 
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Enviar" v-if="form.acepta">
 
 
         </form>
@@ -95,7 +95,7 @@
                     nombre: "",
                     apellido: "",
                     mensaje: "",
-                    horario: "",
+                    horarioContacto: "",
                     producto: "producto1",
                     acepta: false
                 }
