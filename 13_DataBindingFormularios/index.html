@@ -89,6 +89,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         const vm = new Vue({
+            mounted() {
+                if (window.localStorage.getItem('form'))
+                    this.form = JSON.parse(window.localStorage.getItem('form'));
+            },
             el: "#app",
             data: {
                 form: {
@@ -100,7 +104,14 @@
                     acepta: false
                 }
             }
-        })    
+        });
+
+        vm.$watch('form', (nuevo, antiguo) => {
+            window.localStorage.setItem('form', JSON.stringify(nuevo));
+            // guardo y actualizo cada cambio que se hace en el objeto en el local storage del navegador
+        }, { deep:true });
+
+        // {deep:true} como valor de las opciones que le pasamos a $watch es porque quiero que se observen los cambios dentro de las propiedades internas de este objeto
 
         Vue.config.devtools = true;
     </script>
